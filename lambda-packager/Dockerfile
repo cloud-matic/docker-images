@@ -15,4 +15,4 @@ RUN apk add --no-cache --update jq build-base alpine-sdk bash zip python3 python
     pip3 install --upgrade pip setuptools awscli && \
     if [ ! -e /usr/bin/pip ]; then ln -s pip3 /usr/bin/pip ; fi && \
     if [[ ! -e /usr/bin/python ]]; then ln -sf /usr/bin/python3 /usr/bin/python; fi && \
-    rm -r /root/.cache
+    rm -r /root/.cache && apk del build-base alpine-sdk
