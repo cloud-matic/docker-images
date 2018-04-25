@@ -10,7 +10,7 @@ COPY pack-n-upload.sh /usr/local/bin/pack-n-upload.sh
 
 RUN chmod 755 /usr/local/bin/pack-n-upload.sh
 
-RUN apk add --no-cache --update bash zip python3 && \
+RUN apk add --no-cache --update build-base alpine-sdk bash zip python3 && \
     python3 -m ensurepip && \
     pip3 install --upgrade pip setuptools awscli && \
     if [ ! -e /usr/bin/pip ]; then ln -s pip3 /usr/bin/pip ; fi && \
