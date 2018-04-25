@@ -6,6 +6,10 @@ ENV LANG=en_US.UTF-8
 
 RUN apk update
 
+COPY pack-n-upload.sh /usr/local/bin/pack-n-upload.sh
+
+RUN chmod 755 /usr/local/bin/pack-n-upload.sh
+
 RUN apk add --no-cache --update bash zip python3 && \
     python3 -m ensurepip && \
     pip3 install --upgrade pip setuptools awscli && \
