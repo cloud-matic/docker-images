@@ -31,4 +31,4 @@ else
    zip "${OUTPUT_FILE}" $(ls *.py) build-info.json
 fi
 
-aws s3 cp --sse 'aws:kms' ${OUTPUT_FILE} "s3://${DEPLOY_BUCKET}/${DEPLOY_PATH}/${DEPLOY_KEYNAME}/${BITBUCKET_BRANCH}/package.json"
+aws s3 cp --sse 'aws:kms' ${OUTPUT_FILE} "s3://${DEPLOY_BUCKET}/${DEPLOY_PATH}/${DEPLOY_KEYNAME}/${BITBUCKET_BRANCH}/"
