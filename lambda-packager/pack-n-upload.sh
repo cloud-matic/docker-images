@@ -5,6 +5,10 @@ set -e
 export OUTPUT_FILE='package.zip'
 export BITBUCKET_URL='https://bitbucket.org'
 
+[ -z "$DEPLOY_BUCKET" ] && echo 'Missing varible DEPLOY_BUCKET' && exit 1
+[ -z "$DEPLOY_KEYNAME" ] && echo 'Missing varible DEPLOY_KEYNAME' && exit 1
+[ -z "$DEPLOY_PATH" ] && echo 'Missing varible DEPLOY_PATH' && exit 1
+
 cd "${BITBUCKET_CLONE_DIR}/app"
 
 jq -n \
@@ -27,5 +31,4 @@ else
    zip "${OUTPUT_FILE}" $(ls *.py) build-info.json
 fi
 
-pwd
-ls -Alh $(pwd)
+aws s3 cp ${OUTPUT_FILE} "s3://${DEPLOY_BUCKET}/${DEPLOY_PATH}/${DEPLOY_KEYNAME}/${BITBUCKET_BRANCH}/package.json"
