@@ -1,6 +1,7 @@
 #!/bin/bash
 
 set -e
+OUTPUT_FILE='package.zip'
 
 cd "${BITBUCKET_CLONE_DIR}/app"
 if [ -e requirements.txt ]; then
@@ -9,8 +10,11 @@ if [ -e requirements.txt ]; then
    fi
    pip install -r requirements.txt -t "${PY_LOCAL_PATH}"
    sudo find . -name __pycache__ -delete
+   chmod -R 0777 $(pwd)
+   zip -r "${OUTPUT_FILE}" $(ls *.py) "${PY_LOCAL_PATH}"
+else
+   zip "${OUTPUT_FILE}" $(ls *.py)
 fi
-chmod -R 0777 $(pwd)
-zip -r package.zip $(ls *.py) "${PY_LOCAL_PATH}"
+
 pwd
-ls -Alh package.zip
+ls -Alh $(pwd)
