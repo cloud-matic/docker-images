@@ -1,19 +1,30 @@
 #!/bin/bash
 
 set -e
-OUTPUT_FILE='package.zip'
+
+export OUTPUT_FILE='package.zip'
+export BITBUCKET_URL='https://bitbucket.org'
 
 cd "${BITBUCKET_CLONE_DIR}/app"
+
+jq -n \
+       --arg date "$(date -u)" \
+       --arg repo "${BITBUCKET_URL}/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}" \
+       --arg branch "${BITBUCKET_BRANCH}" \
+       --arg commit "${BITBUCKET_COMMIT}" \
+       --arg build "${BITBUCKET_BUILD_NUMBER}" \
+       '{"date":$date, "repo":$repo, "branch":$branch, "commit":$commit, "build":$build}' > build-info.json
+
 if [ -e requirements.txt ]; then
    if [ "${PY_LOCAL_PATH}x" == "x" ]; then
      PY_LOCAL_PATH="lib"
    fi
-   pip install -r requirements.txt -t "${PY_LOCAL_PATH}"
+   pip install --update -r requirements.txt -t "${PY_LOCAL_PATH}"
    sudo find . -name __pycache__ -delete
    chmod -R 0777 $(pwd)
-   zip -r "${OUTPUT_FILE}" $(ls *.py) "${PY_LOCAL_PATH}"
+   zip -r "${OUTPUT_FILE}" $(ls *.py) build-info.json "${PY_LOCAL_PATH}"
 else
-   zip "${OUTPUT_FILE}" $(ls *.py)
+   zip "${OUTPUT_FILE}" $(ls *.py) build-info.json
 fi
 
 pwd
