@@ -19,7 +19,7 @@ if [ -e requirements.txt ]; then
    if [ "${PY_LOCAL_PATH}x" == "x" ]; then
      PY_LOCAL_PATH="lib"
    fi
-   pip install --update -r requirements.txt -t "${PY_LOCAL_PATH}"
+   pip install --upgrade -r requirements.txt -t "${PY_LOCAL_PATH}"
    sudo find . -name __pycache__ -delete
    chmod -R 0777 $(pwd)
    zip -r "${OUTPUT_FILE}" $(ls *.py) build-info.json "${PY_LOCAL_PATH}"
