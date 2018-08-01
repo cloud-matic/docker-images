@@ -11,7 +11,7 @@ RUN apk add --update git openssh wget unzip
 RUN rm -rf /var/cache/apk/*
 
 RUN cd /tmp/ && \
-    wget https://releases.hashicorp.com/terraform/0.11.7/terraform_0.11.7_linux_amd64.zip -o terraform.zip && \
+    wget https://releases.hashicorp.com/terraform/0.11.7/terraform_0.11.7_linux_amd64.zip -O terraform.zip && \
     unzip terraform.zip && \
     mv terraform /usr/bin && \
     ls -l /usr/bin/terraform && \
