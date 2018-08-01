@@ -8,6 +8,11 @@ ENV TF_VERSION=0.11.7
 RUN apk update
 
 RUN apk add --update git openssh wget unzip
+RUN apk add --no-cache --update jq build-base alpine-sdk bash zip python3 python3-dev && \
+    python3 -m ensurepip && \
+    pip3 install --upgrade pip setuptools awscli && \
+    if [ ! -e /usr/bin/pip ]; then ln -s pip3 /usr/bin/pip ; fi && \
+    if [[ ! -e /usr/bin/python ]]; then ln -sf /usr/bin/python3 /usr/bin/python; fi
 
 RUN rm -rf /var/cache/apk/*
 
@@ -16,4 +21,7 @@ RUN cd /tmp/ && \
     unzip terraform.zip && \
     mv terraform /usr/bin && \
     ls -l /usr/bin/terraform && \
-    terraform -version
+    terraform -version && \
+    which aws && \
+    aws --version
+
