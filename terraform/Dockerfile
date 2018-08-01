@@ -28,7 +28,12 @@ RUN cd /tmp/ && \
     aws --version && \
     az --version
 
-RUN mkdir -p /home/terraform
+
+RUN adduser -h /home/terraform -s /bin/bash terraform -D && \
+    mkdir -p /home/terraform/.ssh && \
+    chown -R terraform:terraform /home/terraform && \
+    chmod -R 700 /home/terraform
+
 WORKDIR /home/terraform
 
 ENTRYPOINT ["/bin/bash"]
