@@ -28,3 +28,4 @@ RUN cd /tmp/ && \
     which aws && \
     aws --version
 
+ENTRYPOINT ["/bin/bash"]
