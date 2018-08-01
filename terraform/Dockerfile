@@ -30,7 +30,7 @@ RUN cd /tmp/ && \
 
 
 RUN adduser -h /home/terraform -s /bin/bash terraform -D && \
-    mkdir -p /home/terraform/.ssh && \
+    mkdir -p /home/terraform/.ssh /home/terraform/Project && \
     chown -R terraform:terraform /home/terraform && \
     chmod -R 700 /home/terraform
 
