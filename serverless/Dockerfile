@@ -15,7 +15,7 @@ RUN apk add --no-cache --update jq build-base alpine-sdk bash zip python3 python
     if [ ! -e /usr/bin/pip ]; then ln -s pip3 /usr/bin/pip ; fi && \
     if [[ ! -e /usr/bin/python ]]; then ln -sf /usr/bin/python3 /usr/bin/python; fi
 
-RUN npm i -g npm to update && npm install -g serverless
+RUN npm install -g npm && npm install -g serverless
 
 
 RUN rm -rf /var/cache/apk/*
