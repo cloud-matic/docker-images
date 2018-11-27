@@ -3,7 +3,6 @@ MAINTAINER Mauricio Araya
 
 ENV LANGUAGE=en_US
 ENV LANG=en_US.UTF-8
-ENV TF_VERSION=0.11.7
 
 RUN apk update
 
