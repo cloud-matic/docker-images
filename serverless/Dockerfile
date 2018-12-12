@@ -15,14 +15,15 @@ RUN apk add --no-cache --update jq build-base alpine-sdk bash zip python3 python
     if [ ! -e /usr/bin/pip ]; then ln -s pip3 /usr/bin/pip ; fi && \
     if [[ ! -e /usr/bin/python ]]; then ln -sf /usr/bin/python3 /usr/bin/python; fi
 
-RUN npm install -g npm && npm install -g serverless serverless-custom-packaging-plugin
-
+RUN npm install -g npm && npm install -g serverless
 
 RUN rm -rf /var/cache/apk/*
 
 RUN adduser -h /home/serverless -s /bin/bash serverless -D && \
     mkdir -p /home/serverless/.ssh /home/serverless/Project && \
     wget "https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh" -O /home/serverless/.git-prompt.sh -o /dev/null
+
+RUN npm install --save serverless-custom-packaging-plugin --prefix /home/serverless/serveless_plugins
 
 COPY bashrc /home/serverless/.bashrc
 COPY inputrc /etc/inputrc
