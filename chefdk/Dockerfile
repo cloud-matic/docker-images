@@ -37,17 +37,17 @@ RUN gem install --no-doc --no-ri foodcritic
 RUN pip3 install --upgrade pip setuptools awscli jmespath-terminal requests boto3 && \
     if [[ ! -e /usr/bin/python ]]; then ln -sf /usr/bin/python3 /usr/bin/python; fi
 
-RUN apt-get clean -y && \
-    rm -rf /root/.gem
+RUN apt-get clean -y && rm -rf /root/.gem
 
-RUN adduser -h /home/chefdk -s /bin/bash chefdk -D && \
+RUN useradd -m -d /home/chefdk -s /bin/bash -c ChefDK chefdk && \
     mkdir -p /home/chefdk/.ssh /home/chefdk/Project
 
 COPY bashrc /home/chefdk/.bashrc
 COPY inputrc /etc/inputrc
 
 RUN chown -R chefdk:chefdk /home/chefdk && \
-    chmod -R 700 /home/chefdk
+    find /home/chefdk -type d | xargs chmod -v 700 && \
+    find /home/chefdk -type f | xargs chmod -v 600
 
 WORKDIR /home/chefdk
 
