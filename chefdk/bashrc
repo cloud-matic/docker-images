@@ -2,8 +2,20 @@ if [ -f /etc/bashrc ]; then
  . /etc/bashrc
 fi
 
-alias ll='ls -Al'
 alias s='cd ..'
+
+alias colourify='$(which grc) -es --colour=auto'
+alias configure='colourify ./configure'
+alias diff='colourify diff'
+alias du='colourify du'
+alias env='colourify env'
+alias id='colourify id'
+alias ifconfig='colourify ifconfig'
+alias ll='colourify ls -Alho'
+alias ping='colourify ping'
+alias ps='colourify ps'
+alias tail='colourify tail'
+alias wdiff='colourify wdiff'
 
 export EDITOR=vim
 

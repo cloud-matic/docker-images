@@ -17,6 +17,7 @@ RUN apt-get install -y openssh-client \
                        netcat \
                        iputils-ping \
                        git \
+                       net-tools \
                        jq
 
 RUN apt-get install -y libxml2 zlib1g-dev \
@@ -40,7 +41,8 @@ RUN pip3 install --upgrade pip setuptools awscli jmespath-terminal requests boto
 RUN apt-get clean -y && rm -rf /root/.gem
 
 RUN useradd -m -d /home/chefdk -s /bin/bash -c ChefDK chefdk && \
-    mkdir -p /home/chefdk/.ssh /home/chefdk/Project
+    mkdir -p /home/chefdk/.ssh /home/chefdk/.chef /home/chefdk/Project && \
+    wget https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -O ~/.git-prompt.sh -o /dev/null
 
 COPY bashrc /home/chefdk/.bashrc
 COPY inputrc /etc/inputrc
