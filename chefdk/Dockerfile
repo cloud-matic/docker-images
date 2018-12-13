@@ -42,7 +42,8 @@ RUN apt-get clean -y && rm -rf /root/.gem
 
 RUN useradd -m -d /home/chefdk -s /bin/bash -c ChefDK chefdk && \
     mkdir -p /home/chefdk/.ssh /home/chefdk/.chef /home/chefdk/Project && \
-    wget https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -O ~/.git-prompt.sh -o /dev/null
+    wget https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh \
+         -O /home/chefdk/.git-prompt.sh -o /dev/null
 
 COPY bashrc /home/chefdk/.bashrc
 COPY inputrc /etc/inputrc
