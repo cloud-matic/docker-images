@@ -30,4 +30,4 @@ RUN chown -R git:git /home/git && \
 
 WORKDIR /home/git
 
-ENTRYPOINT ["/bin/bash"]
+ENTRYPOINT ["/bin/bash", "-l", "-c"]

@@ -31,4 +31,4 @@ RUN chown -R awsamplify:awsamplify /home/awsamplify && \
 
 WORKDIR /home/awsamplify
 
-ENTRYPOINT ["/bin/bash"]
+ENTRYPOINT ["/bin/bash", "-l", "-c"]

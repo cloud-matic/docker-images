@@ -36,4 +36,4 @@ RUN chown -R terraform:terraform /home/terraform && \
 
 WORKDIR /home/terraform
 
-ENTRYPOINT ["/bin/bash"]
+ENTRYPOINT ["/bin/bash", "-l", "-c"]

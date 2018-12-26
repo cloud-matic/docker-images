@@ -37,4 +37,4 @@ RUN chown -R hugo:hugo /home/hugo && \
 
 WORKDIR /home/hugo
 
-ENTRYPOINT ["/bin/bash"]
+ENTRYPOINT ["/bin/bash", "-l", "-c"]

@@ -33,4 +33,4 @@ RUN chown -R serverless:serverless /home/serverless && \
 
 WORKDIR /home/serverless
 
-ENTRYPOINT ["/bin/bash"]
+ENTRYPOINT ["/bin/bash", "-l", "-c"]
