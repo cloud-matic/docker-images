@@ -33,7 +33,7 @@ RUN curl -s https://packages.chef.io/chef.asc | \
          apt-get update && \
          apt-get install chefdk
 
-RUN gem install --no-doc --no-ri foodcritic
+RUN gem install --no-doc --no-ri foodcritic bundler
 
 RUN pip3 install --upgrade pip setuptools awscli jmespath-terminal requests boto3 && \
     if [[ ! -e /usr/bin/python ]]; then ln -sf /usr/bin/python3 /usr/bin/python; fi
