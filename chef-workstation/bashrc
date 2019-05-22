@@ -1,0 +1,41 @@
+export EDITOR=vim
+
+if [ -f /etc/bashrc ]; then
+ . /etc/bashrc
+fi
+
+alias s='cd ..'
+
+alias colourify='$(which grc) -es --colour=auto'
+alias configure='colourify ./configure'
+alias diff='colourify diff'
+alias du='colourify du'
+alias env='colourify env'
+alias id='colourify id'
+alias ifconfig='colourify ifconfig'
+alias ll='colourify ls -Alho'
+alias ping='colourify ping'
+alias ps='colourify ps'
+alias tail='colourify tail'
+alias wdiff='colourify wdiff'
+
+umask 0022
+
+shopt -s histappend
+shopt -s checkwinsize
+
+fancy_prompt() {
+  local red=$(tput setaf 208)
+  local green=$(tput setaf 2)
+  local blue=$(tput setaf 4)
+  local purple=$(tput setaf 5)
+  local reset=$(tput sgr0)
+  export PS1=" \[$green\]\u \[$red\]\w\[$green\]\$(__git_ps1)\n └─▶\$(aws_alias_var)\[$reset\] "
+}
+
+if [ -f $HOME/.git-prompt.sh ]; then
+  source $HOME/.git-prompt.sh
+  if [ "$(type -t __git_ps1)" == 'function' ]; then
+    fancy_prompt
+  fi
+fi
